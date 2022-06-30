@@ -2,42 +2,48 @@ package ru.netology.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 public class Game {
-    private Collection<Player> gamers = new ArrayList<>();
+    private HashMap<String, Integer> gamers = new HashMap<>();
 
     public void register(Player player) {
-        if (findById(player.getId()) != null) {
+        if (gamers.containsKey(player.getName())) {
             throw new AlreadyExistsException("Player with id:" + player.getId() + " already exist");
         }
-        gamers.add(player);
+        gamers.put(player.getName(), player.getStrength());
     }
 
-    public Player findById(int id) {
-        for (Player gamer : gamers) {
-            if (gamer.getId() == id) {
-                return gamer;
-            }
-        }
-        return null;
-    }
-
-    public Player findByName(String name) {
-        for (Player gamer : gamers) {
-            if (gamer.getName().equals(name)) return gamer;
-        }
-        return null;
-    }
+//    public Player findById(int id) {
+//        for (Player gamer : gamers) {
+//            if (gamer.getId() == id) {
+//                return gamer;
+//            }
+//        }
+//        return null;
+//    }
+//
+//    public Player findByName(String name) {
+//        Player find;
+//        if (gamers.containsKey(name)) {
+//            find = null;
+//            return find;
+//        }
+//
+//        return null;
+//    }
 
     public int round(String playerName1, String playerName2) {
-        if (findByName(playerName1) == null) {
+        if (!gamers.containsKey(playerName1)) {
             throw new NotRegisteredException("Player with name " + playerName1 + "no registered");
         }
-        if (findByName(playerName2) == null) {
+        if (!gamers.containsKey(playerName2)) {
             throw new NotRegisteredException("Player with name " + playerName2 + "no registered");
         }
-        if (findByName(playerName1).getStrength() - findByName(playerName2).getStrength() > 0) return 1;
-        if (findByName(playerName1).getStrength() - findByName(playerName2).getStrength() < 0) return 2;
+        Integer player1 = gamers.get(playerName1);
+        Integer player2 = gamers.get(playerName2);
+        if (player1 - player2 > 0) return 1;
+        if (player1 - player2 < 0) return 2;
         else return 0;
 
     }
