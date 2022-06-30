@@ -14,25 +14,6 @@ public class Game {
         gamers.put(player.getName(), player.getStrength());
     }
 
-//    public Player findById(int id) {
-//        for (Player gamer : gamers) {
-//            if (gamer.getId() == id) {
-//                return gamer;
-//            }
-//        }
-//        return null;
-//    }
-//
-//    public Player findByName(String name) {
-//        Player find;
-//        if (gamers.containsKey(name)) {
-//            find = null;
-//            return find;
-//        }
-//
-//        return null;
-//    }
-
     public int round(String playerName1, String playerName2) {
         if (!gamers.containsKey(playerName1)) {
             throw new NotRegisteredException("Player with name " + playerName1 + "no registered");
