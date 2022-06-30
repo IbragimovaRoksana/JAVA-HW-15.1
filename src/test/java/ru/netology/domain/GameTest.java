@@ -32,12 +32,6 @@ class GameTest {
     }
 
     @Test
-    void shouldRegisterFindName() {
-        Player actual = turnir.findByName("Everdin");
-        assertEquals(everdin, actual);
-    }
-
-    @Test
     void shouldAlreadyRegister() {
         assertThrows(AlreadyExistsException.class, () -> turnir.register(sara));
     }
