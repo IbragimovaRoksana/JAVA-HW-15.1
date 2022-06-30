@@ -19,7 +19,7 @@ class GameTest {
     Player vasya = new Player(10, "Vasya", 5);
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         turnir.register(frank);
         turnir.register(jessica);
         turnir.register(arnold);
@@ -32,14 +32,14 @@ class GameTest {
     }
 
     @Test
-    void shouldRegisterFindName(){
+    void shouldRegisterFindName() {
         Player actual = turnir.findByName("Everdin");
         assertEquals(everdin, actual);
     }
 
     @Test
     void shouldAlreadyRegister() {
-        assertThrows(AlreadyExistsException.class, () ->turnir.register(sara));
+        assertThrows(AlreadyExistsException.class, () -> turnir.register(sara));
     }
 
     @Test
@@ -48,25 +48,28 @@ class GameTest {
         int expected = 1;
         assertEquals(expected, actual);
     }
+
     @Test
     void shouldRoundWinSecondPlayer() {
         int actual = turnir.round("Loran", "Michael");
         int expected = 2;
         assertEquals(expected, actual);
     }
+
     @Test
     void shouldRoundDraw() {
         int actual = turnir.round("Sara", "Arnold");
         int expected = 0;
         assertEquals(expected, actual);
     }
+
     @Test
-    void shouldNotRegisterFirstPlayer(){
-        assertThrows(NotRegisteredException.class, ()->turnir.round("Vasya", "Jacob"));
+    void shouldNotRegisterFirstPlayer() {
+        assertThrows(NotRegisteredException.class, () -> turnir.round("Vasya", "Jacob"));
     }
 
     @Test
-    void shouldNotRegisterSecondPlayer(){
-        assertThrows(NotRegisteredException.class, ()->turnir.round("Frank", "Vasya"));
+    void shouldNotRegisterSecondPlayer() {
+        assertThrows(NotRegisteredException.class, () -> turnir.round("Frank", "Vasya"));
     }
 }
